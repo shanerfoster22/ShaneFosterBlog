@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% block body %}
+        <div class="container bg-white p-5 my-5 shadow bg-body rounded">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="text-md-start text-sm-center fw-bold text-dark text-opacity-75">Welcome to my dog blog!</h1>
+                <p class="lead">This blog is a place where dog lovers can share their pets to the world. New to this page? Register for an account to start creating your own blog posts.</p>
+            </div>
+            <div class="col-lg-4">
+                <img src="https://images.saymedia-content.com/.image/c_limit%2Ccs_srgb%2Cq_auto:eco%2Cw_392/MTc0MjU0ODc2MjYyNDc1NjQ0/drawing-a-cartoon-dog.webp" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+<div class="container mt-5 mb-3">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-lg-4 my-4">
+            <div class="card text-white bg-dark mb-3" style="width: 20rem; height: 33rem;">
+                {% if post.photo %}
+            <img src="{{post.photo.url}}" class="card-img-top" alt="..." height="250px">
+            {% endif %}
+                <a class="card-body">
+                  <h5 class="card-title">{{post.title}} <br><small>by {{post.author}}</small></h5>
+                  <p class="card-text">{{post.content| truncatechars:210}}</p>
+                    <strong>{{ post.author }}</strong> {{ post.created_on }}
+                {% if request.user == post.author %}
+                    <a href="{% url 'delete_post' id=post.id %}" class = "btn btn-danger" type="submit">Delete</a>
+                {% endif %}
+                </a>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

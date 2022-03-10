@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block title %} Profile {% endblock %}
+{% block body %}
+    <form action="{% url 'upload_blog' %}" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+        <div class="container mt-4">
+            {{ form.as_p }}
+            <button class="btn btn-dark">Publish</button>
+        </div>
+    </form>
+    {% block js %}
+<script>
+    {% if alert %}
+    alert('Your blog post has been published!');
+    document.location = '/';
+    {% endif %}
+</script>
+{% endblock %}
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block body %}
+    <form enctype="multipart/form-data" method="POST"> {% csrf_token %} </form>
+    <div class="container mt-4">
+    <div class="card">
+        <form class="card-body">
+          <h5 class="card-title">Are you sure you want to delete this blog?</h5>
+          <form action="{% url 'delete_post' post.slug %}" method="POST"> </form>
+            {% csrf_token %}
+          <a href="/" class="btn btn-success">Cancel</a>
+          <button class="btn btn-danger">Delete Blog</button>
+        </form>
+      </div>
+</div>
+{% endblock %}
+
+
+

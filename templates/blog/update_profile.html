@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block body %}
+<form action="{% url 'update_profile' %}" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+    <div class="container mt-3">
+   {{ form.as_p }}
+        <button type="submit" class="btn btn-dark">Update</button>
+    </div>
+</form>
+    {% block js %}
+        <script>
+            {% if alert %}
+                alert('Your Profile has been updated successfully.');
+                document.location = "{% url 'update_profile' %}";
+            {% endif %}
+        </script>
+{% endblock %}
+{% endblock %}
+
